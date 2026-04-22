@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15ee105ff91f434eb9a988f1822ee70d, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: Assembly-CSharp::_Data.GameConfig
+  PlayerViewPrefab: {fileID: 4842060814857290878, guid: ff7a6db1986fef1448a7d370ce9a572a, type: 3}
+  BulletViewPrefab: {fileID: 973269327609565534, guid: a8722d071b4e85f43a50fc5d5933285d, type: 3}
+  AsteroidViewPrefab: {fileID: 7737724335350911968, guid: 4500830959ff65f4da71fc872a988e37, type: 3}
+  AsteroidInfos:
+  - AsteroidType: 1
+    AsteroidColor: {r: 0.8773585, g: 0.0041384934, b: 0.0041384934, a: 1}
+  - AsteroidType: 2
+    AsteroidColor: {r: 0.15907902, g: 0.8113208, b: 0.12629052, a: 1}
+  - AsteroidType: 3
+    AsteroidColor: {r: 0.11863652, g: 0.4064661, b: 0.8113208, a: 1}
