@@ -41,8 +41,12 @@ namespace _Gameplay._Controllers {
 
             // 3. Setup Asteroids Controller
             _asteroidsController = new AsteroidsController(levelData, _gameConfig, _levelRoot.transform);
-            _asteroidsController.OnAsteroidHitPlayer += () => _playerModel.TakeDamage(1);
-            _asteroidsController.OnAsteroidDestroyed += HandleAsteroidDestroyed;
+            _asteroidsController.OnAsteroidHitPlayer += () => {
+                if (_isPlaying) _playerModel.TakeDamage(1);
+            };
+            _asteroidsController.OnAsteroidDestroyed += () => {
+                if (_isPlaying) HandleAsteroidDestroyed();
+            };
 
             _resultDialog.OnContinueClicked += HandleResultDialogClosed;
 
@@ -78,14 +82,13 @@ namespace _Gameplay._Controllers {
 
         private void WinGame() {
             _isPlaying = false;
-            _resultDialog.Show(isWin: false);
+            _resultDialog.Show(isWin: true);
         }
 
         private void HandleResultDialogClosed(bool isWin) {
             _resultDialog.Hide();
             _gameplayUI.Hide();
 
-            // Сообщаем GameManager'у, что геймплей полностью окончен
             OnLevelFinished?.Invoke(isWin);
         }
 

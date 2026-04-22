@@ -8,7 +8,6 @@ using _Services;
 using _Services._DI;
 using _Services._SaveService;
 using _Services.PlayerProgressService;
-using DefaultNamespace;
 using UnityEngine;
 
 namespace _Core {

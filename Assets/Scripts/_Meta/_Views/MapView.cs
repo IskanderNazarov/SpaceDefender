@@ -11,7 +11,7 @@ namespace _Meta._Views {
         private void Awake() {
             for (var i = 0; i < _levelNodes.Count; i++) {
                 var index = i;
-                _levelNodes[i].OnClicked += (idx) => OnLevelSelected?.Invoke(idx);
+                _levelNodes[i].OnClicked += idx => OnLevelSelected?.Invoke(idx);
             }
         }
 

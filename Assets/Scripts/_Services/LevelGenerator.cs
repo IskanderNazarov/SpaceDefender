@@ -29,7 +29,7 @@ namespace _Services {
 
             //4. Randomize asteroids win count
             var t = levelIndex / 20;
-            var count = Mathf.Lerp(30, 100, t);
+            var count = Mathf.Lerp(10, 100, t);
             data.AsteroidsHitToWin = (int)count;
 
             return data;

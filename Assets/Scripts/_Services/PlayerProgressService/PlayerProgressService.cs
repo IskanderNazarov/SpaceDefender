@@ -29,6 +29,8 @@ namespace _Services.PlayerProgressService {
         }
 
         public void SetMaxUnlockedLevel(int index) {
+            Debug.Log($"[SetMaxUnlockedLevel] index: {index}");
+            Debug.Log($"[SetMaxUnlockedLevel] _cachedData.MaxUnlockedLevel: {_cachedData.MaxUnlockedLevel}");
             if (index > _cachedData.MaxUnlockedLevel) {
                 _cachedData.MaxUnlockedLevel = index;
                 Save();
@@ -46,7 +48,6 @@ namespace _Services.PlayerProgressService {
             _dataSaver.LoadData(SaveKey, (data, success) => {
                 if (success && !string.IsNullOrEmpty(data)) {
                     _cachedData = JsonUtility.FromJson<PlayerProgressData>(data);
-                    Debug.Log($"[LOAD] data: {data}, _cachedData: {_cachedData == null}");
                     _generatedLevels = _cachedData.GetLevelsDictionary();
                 } else {
                     _cachedData = new PlayerProgressData();

@@ -4,6 +4,7 @@ using _Meta._Views;
 using _Services;
 using _Services._DI;
 using _Services.PlayerProgressService;
+using UnityEngine;
 
 namespace _Meta._Controllers {
     public class MapController {
@@ -14,7 +15,7 @@ namespace _Meta._Controllers {
         private ILevelInfoDialog _infoDialog;
         private int _selectedLevelIndex;
 
-        public event Action<LevelData> OnStartLevelRequested;
+        public event Action<int, LevelData> OnStartLevelRequested;
 
         public void Initialize(IMapView mapView, ILevelInfoDialog infoDialog) {
             _mapView = mapView;
@@ -37,21 +38,19 @@ namespace _Meta._Controllers {
             _selectedLevelIndex = index;
             int maxUnlocked = _progressService.MaxUnlockedLevel;
 
+            // Если уровень закрыт
             if (index > maxUnlocked) {
                 _infoDialog.Show(null, true);
                 return;
             }
 
-            LevelData data;
-            if (index < maxUnlocked) {
+            // Для открытых и пройденных уровней:
+            LevelData data = _progressService.GetLevelData(index);
+
+            // Если данных нет (первый запуск уровня или мы их удалили после прошлой победы)
+            if (data == null) {
                 data = _levelGenerator.GenerateLevelData(index);
                 _progressService.SaveLevelData(index, data);
-            } else {
-                data = _progressService.GetLevelData(index);
-                if (data == null) {
-                    data = _levelGenerator.GenerateLevelData(index);
-                    _progressService.SaveLevelData(index, data);
-                }
             }
 
             _infoDialog.Show(data, false);
@@ -62,7 +61,8 @@ namespace _Meta._Controllers {
             if (data != null) {
                 _mapView.Hide();
                 _infoDialog.Hide();
-                OnStartLevelRequested?.Invoke(data);
+                
+                OnStartLevelRequested?.Invoke(_selectedLevelIndex, data);
             }
         }
     }

@@ -1,22 +1,14 @@
-﻿using System;
-using _Core;
-using _Data;
-using _Meta._Views;
+﻿using _Meta._Views;
 using _Services._DI;
 using UnityEngine;
 
-namespace DefaultNamespace {
+namespace _Core {
     public class Bootstrapper : MonoBehaviour {
         [SerializeField] private DIInstaller _diInstaller;
         [SerializeField] private MapView _mapView;
         [SerializeField] private LevelInfoDialog _infoDialog;
 
         [Inject] private GameManager _gameManager;
-
-        //-------------------------------
-        private void Awake() {
-        }
-        //-------------------------------
 
         private void Start() {
             _diInstaller.Install(this);
